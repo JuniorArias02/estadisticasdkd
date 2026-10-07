@@ -9,8 +9,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
+      TZ: ${TZ:-America/Bogota}
     ports:
-      - '3306:3306'
+      - '3307:3306'
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -27,7 +28,8 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: "mysql://root:${DB_ROOT_PASSWORD}@db:3306/${DB_NAME}"
+      TZ: ${TZ:-America/Bogota}
     ports:
       - '3000:3000'
     depends_on:

@@ -8,9 +8,11 @@ import { ListarRolesUseCase } from './application/use-cases/listar-roles.use-cas
 import { ActualizarRolUseCase } from './application/use-cases/actualizar-rol.use-case.js';
 import { EliminarRolUseCase } from './application/use-cases/eliminar-rol.use-case.js';
 import { PrismaModule } from '../../prisma/prisma.module.js';
+import { AuthModule } from '../auth/auth.module.js';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule, AuthModule, PassportModule],
   controllers: [RolesController],
   providers: [
     {

@@ -7,10 +7,16 @@ FROM node:24-alpine AS builder
 
 WORKDIR /usr/src/app
 
+# Install openssl for Prisma
+RUN apk add --no-cache openssl
+
 # Copy package files and install dependencies
 COPY package*.json ./
 COPY prisma ./prisma/
-RUN npm ci
+RUN npm config set fetch-retries 5 && \
+    npm config set fetch-retry-mintimeout 20000 && \
+    npm config set fetch-retry-maxtimeout 120000 && \
+    npm ci
 
 # Copy the rest of the application
 COPY . .
@@ -24,12 +30,18 @@ FROM node:24-alpine AS production
 
 WORKDIR /usr/src/app
 
+# Install openssl for Prisma
+RUN apk add --no-cache openssl
+
 # Copy package files
 COPY package*.json ./
 COPY prisma ./prisma/
 
 # Install only production dependencies
-RUN npm ci --only=production
+RUN npm config set fetch-retries 5 && \
+    npm config set fetch-retry-mintimeout 20000 && \
+    npm config set fetch-retry-maxtimeout 120000 && \
+    npm ci --only=production
 
 # Copy generated Prisma client from builder
 COPY --from=builder /usr/src/app/node_modules/@prisma/client ./node_modules/@prisma/client

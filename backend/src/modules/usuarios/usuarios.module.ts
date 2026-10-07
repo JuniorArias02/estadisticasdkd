@@ -7,10 +7,13 @@ import { ObtenerUsuarioUseCase } from './application/use-cases/obtener-usuario.u
 import { ListarUsuariosUseCase } from './application/use-cases/listar-usuarios.use-case.js';
 import { ActualizarUsuarioUseCase } from './application/use-cases/actualizar-usuario.use-case.js';
 import { EliminarUsuarioUseCase } from './application/use-cases/eliminar-usuario.use-case.js';
+import { CambiarClaveUseCase } from './application/use-cases/cambiar-clave.use-case.js';
 import { PrismaModule } from '../../prisma/prisma.module.js';
+import { AuthModule } from '../auth/auth.module.js';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule, AuthModule, PassportModule],
   controllers: [UsuariosController],
   providers: [
     {
@@ -22,6 +25,7 @@ import { PrismaModule } from '../../prisma/prisma.module.js';
     ListarUsuariosUseCase,
     ActualizarUsuarioUseCase,
     EliminarUsuarioUseCase,
+    CambiarClaveUseCase,
   ],
   exports: [UsuarioRepository],
 })

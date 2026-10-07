@@ -299,9 +299,7 @@ Ejemplo:
 ```typescript
 @Injectable()
 export class ObtenerIndicadorUseCase {
-  constructor(
-    private readonly indicadorRepository: IndicadorRepository,
-  ) {}
+  constructor(private readonly indicadorRepository: IndicadorRepository) {}
 
   async ejecutar(id: number): Promise<Indicador> {
     const indicador = await this.indicadorRepository.obtenerPorId(id);
@@ -365,9 +363,7 @@ Incorrecto:
 ```typescript
 @Injectable()
 export class CrearIndicadorUseCase {
-  constructor(
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 }
 ```
 
@@ -376,9 +372,7 @@ Correcto:
 ```typescript
 @Injectable()
 export class CrearIndicadorUseCase {
-  constructor(
-    private readonly indicadorRepository: IndicadorRepository,
-  ) {}
+  constructor(private readonly indicadorRepository: IndicadorRepository) {}
 }
 ```
 
@@ -429,13 +423,13 @@ Todas las entradas, salidas, parámetros y estructuras internas deben estar corr
 Se debe preferir:
 
 ```typescript
-unknown
+unknown;
 ```
 
 sobre:
 
 ```typescript
-any
+any;
 ```
 
 cuando no se conozca el tipo de un dato.
@@ -476,12 +470,12 @@ NestJS debe encargarse del manejo de excepciones mediante sus mecanismos nativos
 Se deben utilizar excepciones apropiadas:
 
 ```typescript
-NotFoundException
-BadRequestException
-UnauthorizedException
-ForbiddenException
-ConflictException
-UnprocessableEntityException
+NotFoundException;
+BadRequestException;
+UnauthorizedException;
+ForbiddenException;
+ConflictException;
+UnprocessableEntityException;
 ```
 
 Ejemplo:
@@ -796,18 +790,18 @@ usuario.entity.ts
 Las clases deben utilizar `PascalCase`.
 
 ```typescript
-CrearIndicadorUseCase
-ObtenerUsuarioUseCase
-PrismaIndicadorRepository
-CrearUsuarioDto
+CrearIndicadorUseCase;
+ObtenerUsuarioUseCase;
+PrismaIndicadorRepository;
+CrearUsuarioDto;
 ```
 
 Las variables y métodos deben utilizar `camelCase`.
 
 ```typescript
-obtenerIndicador()
-crearUsuario()
-indicadorRepository
+obtenerIndicador();
+crearUsuario();
+indicadorRepository;
 ```
 
 ---
@@ -819,21 +813,21 @@ Los métodos deben representar acciones claras.
 Preferir:
 
 ```typescript
-obtenerUsuario()
-crearUsuario()
-actualizarUsuario()
-eliminarUsuario()
-validarRequisitos()
-generarReporte()
+obtenerUsuario();
+crearUsuario();
+actualizarUsuario();
+eliminarUsuario();
+validarRequisitos();
+generarReporte();
 ```
 
 Evitar nombres ambiguos:
 
 ```typescript
-hacer()
-procesar()
-manejar()
-ejecutarTodo()
+hacer();
+procesar();
+manejar();
+ejecutarTodo();
 ```
 
 salvo que el contexto justifique claramente su utilización.
@@ -1021,15 +1015,13 @@ La implementación debe priorizar:
 
 antes que introducir abstracciones innecesarias.
 
-
 Node.js
 └── NestJS
-    ├── TypeScript
-    ├── Prisma
-    ├── PostgreSQL
-    ├── JWT
-    ├── class-validator
-    ├── class-transformer
-    ├── Swagger / OpenAPI
-    └── ESLint + Prettier
-
+├── TypeScript
+├── Prisma
+├── PostgreSQL
+├── JWT
+├── class-validator
+├── class-transformer
+├── Swagger / OpenAPI
+└── ESLint + Prettier

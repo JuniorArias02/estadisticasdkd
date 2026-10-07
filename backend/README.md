@@ -4,16 +4,16 @@ API REST del sistema de estadísticas generales de DKD. Construida con **NestJS 
 
 ## Stack técnico
 
-| Capa | Tecnología |
-|---|---|
-| Framework | NestJS 12 |
-| Lenguaje | TypeScript 6 |
-| ORM | Prisma 5 |
-| Base de datos | MySQL 8 |
-| Autenticación | JWT + Passport |
-| Validación | class-validator / class-transformer |
-| Tests | Vitest |
-| Runtime | Node.js 24 |
+| Capa          | Tecnología                          |
+| ------------- | ----------------------------------- |
+| Framework     | NestJS 12                           |
+| Lenguaje      | TypeScript 6                        |
+| ORM           | Prisma 5                            |
+| Base de datos | MySQL 8                             |
+| Autenticación | JWT + Passport                      |
+| Validación    | class-validator / class-transformer |
+| Tests         | Vitest                              |
+| Runtime       | Node.js 24                          |
 
 ---
 
@@ -75,6 +75,9 @@ docker compose down -v
 
 # Reconstruir solo la imagen de la API
 docker compose up -d --build api
+
+docker compose up -d
+
 ```
 
 ---
@@ -109,13 +112,13 @@ Copia `.env.example` como `.env` y completa los valores:
 cp .env.example .env
 ```
 
-| Variable | Descripción | Ejemplo |
-|---|---|---|
-| `DATABASE_URL` | Cadena de conexión a MySQL | `mysql://root:pass@localhost:3306/estadisticasDkd` |
-| `DB_ROOT_PASSWORD` | Contraseña root de MySQL (usada por Docker) | `password` |
-| `DB_NAME` | Nombre de la base de datos | `estadisticasDkd` |
-| `JWT_SECRET` | Clave secreta para firmar los tokens JWT | `un_secreto_largo_y_seguro` |
-| `JWT_EXPIRATION` | Tiempo de vida del token JWT | `4h` |
+| Variable           | Descripción                                 | Ejemplo                                            |
+| ------------------ | ------------------------------------------- | -------------------------------------------------- |
+| `DATABASE_URL`     | Cadena de conexión a MySQL                  | `mysql://root:pass@localhost:3306/estadisticasDkd` |
+| `DB_ROOT_PASSWORD` | Contraseña root de MySQL (usada por Docker) | `password`                                         |
+| `DB_NAME`          | Nombre de la base de datos                  | `estadisticasDkd`                                  |
+| `JWT_SECRET`       | Clave secreta para firmar los tokens JWT    | `un_secreto_largo_y_seguro`                        |
+| `JWT_EXPIRATION`   | Tiempo de vida del token JWT                | `4h`                                               |
 
 > ⚠️ El archivo `.env` está en `.gitignore` y nunca debe subirse al repositorio.
 
@@ -136,6 +139,18 @@ npm run prisma:studio
 # Poblar la base de datos con datos iniciales
 npm run seed
 ```
+
+---
+
+## Documentación (Swagger)
+
+La API cuenta con documentación interactiva generada automáticamente mediante `@nestjs/swagger`.
+
+Para acceder a la interfaz gráfica de Swagger UI:
+1. Asegúrate de tener la API corriendo (`npm run start:dev` o mediante Docker).
+2. Abre tu navegador y navega a: [http://localhost:3000/api/docs](http://localhost:3000/api/docs).
+
+> 💡 **Nota**: Gracias al plugin de compilación de Swagger habilitado en `nest-cli.json`, los DTOs y tipos de retorno son inferidos directamente desde el código TypeScript sin necesidad de decoradores manuales por cada controlador.
 
 ---
 
